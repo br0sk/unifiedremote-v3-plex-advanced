@@ -22,7 +22,7 @@ function bringToFront()
   task.switchtowait(hwnd);
 end
 
--- This functionsplits a string separated by a character and returns an array
+-- This function splits a string separated by a character and returns an array
 -- This function is based on answer 8 here http://stackoverflow.com/questions/1426954/split-string-in-lua
 -- The default separator is ,
 function explode(inputstr, sep)
@@ -60,7 +60,7 @@ end
 
 -- *Button control actions*
 
--- Start Rewinding, run several times to change the rewind speed
+-- Start rewinding, run several times to change the rewind speed
 actions.rwd = function()
     bringToFront();
     keyboard.stroke("r");
@@ -72,7 +72,7 @@ actions.fullscreen = function()
     keyboard.stroke("alt", "return");
 end
 
--- Fast Forward, run several times to change the fast forward speed
+-- Fast forward, run several times to change the fast forward speed
 actions.ff = function()
     bringToFront();
     keyboard.stroke("f");
@@ -150,7 +150,7 @@ actions.play_menu = function()
     keyboard.stroke("m");
 end
 
--- Brings up the popup menu when you fofr instance is browsing the episodes in a TV series
+-- Brings up the popup menu when you for instance is browsing the episodes in a TV series
 actions.popup_menu = function()
     bringToFront();
     keyboard.stroke("c");
@@ -169,7 +169,7 @@ actions.reload_plex_library = function()
   end
 end
 
--- This function will restart the server if it exxists on the controlled PC
+-- This function will restart the server if it exists on the controlled PC
 actions.restart_plex_server = function()
 -- Not implemented yet
   device.toast ("Not yet implemented!");
@@ -177,16 +177,19 @@ actions.restart_plex_server = function()
   
 end
 
+-- Decreases the global Windows volume
 actions.windows_volume_down = function()
     bringToFront();
     keyboard.stroke("volumedown");
 end
 
+-- Mutes the global Windows sounds
 actions.windows_volume_mute = function()
     bringToFront();
     keyboard.stroke("volumemute");
 end
 
+-- Increases the global Windows volume
 actions.windows_volume_up = function()
     bringToFront();
     keyboard.stroke("volumeup");

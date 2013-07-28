@@ -49,9 +49,10 @@ end
 events.focus = function ()
   timer.timeout(function ()
     if(server.get ( "screenSwitchActive" ) == "yes") then
-      log.info("Screen switcher active!");
-      server.update("restart_plex_server", "text", "Test text");
-      server.update("restart_plex_server", "visibility", "gone");
+        -- Test code
+--      log.info("Screen switcher active!");
+--      server.update("restart_plex_server", "text", "Test text");
+--      server.update("restart_plex_server", "visibility", "gone");
     end
   end, 500);
 end

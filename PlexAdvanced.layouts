@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layout onVolumeUp="vup" onVolumeDown="vdown"  OnLaunch="launch_plex">
+  <grid>
+    <Row>
+      <button OnTap="rwd" Icon="rwd" />
+      <button OnTap="fullscreen" Icon="fullscreen" />
+      <button OnTap="ff" Icon="ff" />
+    </Row>
+    <Row>
+      <button OnTap="vdown" Icon="vdown" />
+      <button OnTap="vup" Icon="vup" />
+    </Row>
+    <Row>
+      <button OnTap="stop" Icon="stop" />
+      <button OnTap="up" Icon="up" />
+      <button OnTap="play_pause" Icon="play_pause" />
+    </Row>
+    <Row>
+      <button OnTap="left" Icon="left" />
+      <button OnTap="select" Icon="select" />
+      <button OnTap="right" Icon="right" />
+    </Row>
+    <Row>
+      <button OnTap="toggle_movie_menu" Text="Menu/Full" />
+      <button OnTap="down" Icon="down" />
+      <button OnTap="back1" Icon="back" />
+    </Row>
+    <Row>
+      <button OnTap="play_menu" Text="Menu" />
+      <button OnTap="popup_menu" Text="Popup Menu"/>
+    </Row>
+    <Row>
+      <label Text="---Extra Controls---" />
+    </Row>
+    <Row>
+      <button OnTap="reload_plex_library" Text="Update Library" />
+      <button id="restart_plex_server" OnTap="restart_plex_server" Text="Restart Server" />
+    </Row>
+    <Row>
+      <button OnTap="windows_volume_down" Icon="vdown" />
+      <button OnTap="windows_volume_mute" Icon="vmute" />
+      <button OnTap="windows_volume_up" Icon="vup" />
+    </Row>
+  </grid>
+</layout>

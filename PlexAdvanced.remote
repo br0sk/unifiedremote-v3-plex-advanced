@@ -1,0 +1,193 @@
+-- *Metadata*
+meta.id = "br0sk.PlexAdvanced"
+meta.name = "Plex Advanced"
+meta.author = "John Eskilsson"
+meta.description = "A Remote for Controlling Plex Media Center"
+
+-- *Initialise Unified Remote Libs*
+local keyboard = libs.keyboard;
+local task = libs.task;
+local server = libs.server;
+local device = libs.device;
+local log = libs.log;
+local server = libs.server;
+local timer = libs.timer;
+
+-- *Common functions*
+
+-- Make the Plex application take focus before the command is executed.
+-- Makes it possible to click any of the controls even if the Plex Window is not active.
+function bringToFront()
+  local hwnd = task.window("Plex.exe");
+  task.switchtowait(hwnd);
+end
+
+-- This functionsplits a string separated by a character and returns an array
+-- This function is based on answer 8 here http://stackoverflow.com/questions/1426954/split-string-in-lua
+-- The default separator is ,
+function explode(inputstr, sep)
+  if sep == nil then
+    sep = ","
+  end
+  t={} ; i=1
+  for str in string.gmatch(inputstr, "([^"..sep.."]+)") do
+    t[i] = str
+    i = i + 1
+  end
+  return t
+end
+
+
+-- *General control actions*
+
+-- Start the Plex application using the app path in PlexAdvanced.properties
+actions.launch_plex = function()
+    task.start ( server.get ( "appPath" ));
+end
+
+-- This runs the first time the remote is loaded
+events.focus = function ()
+  timer.timeout(function ()
+    if(server.get ( "screenSwitchActive" ) == "yes") then
+      log.info("Screen switcher active!");
+      server.update("restart_plex_server", "text", "Test text");
+      server.update("restart_plex_server", "visibility", "gone");
+    end
+  end, 500);
+end
+
+
+-- *Button control actions*
+
+-- Start Rewinding, run several times to change the rewind speed
+actions.rwd = function()
+    bringToFront();
+    keyboard.stroke("r");
+end
+
+-- Toggle fullscreen and window mode
+actions.fullscreen = function()
+    bringToFront();
+    keyboard.stroke("alt", "return");
+end
+
+-- Fast Forward, run several times to change the fast forward speed
+actions.ff = function()
+    bringToFront();
+    keyboard.stroke("f");
+end
+
+-- Decrease the Plex volume
+actions.vdown = function()
+    bringToFront();
+    keyboard.stroke("oem_minus");
+end
+
+-- Increase the Plex volume
+actions.vup = function()
+    bringToFront();
+    keyboard.stroke("oem_plus");
+end
+
+-- Stop playback
+actions.stop = function()
+    bringToFront();
+    keyboard.stroke("x");
+end
+
+-- Toggle play/pause
+actions.play_pause = function()
+    bringToFront();
+    keyboard.stroke("p");
+end
+
+-- Move the selection up
+actions.up = function()
+    bringToFront();
+    keyboard.stroke("up");
+end
+
+-- Move the selection left
+actions.left = function()
+    bringToFront();
+    keyboard.stroke("left");
+end
+
+-- Select or activate current selection
+actions.select = function()
+    bringToFront();
+    keyboard.stroke("return");
+end
+
+-- Move the selection to the right
+actions.right = function()
+    bringToFront();
+    keyboard.stroke("right");
+end
+
+-- Bring up the menu during playback
+actions.toggle_movie_menu = function()
+    bringToFront();
+    keyboard.stroke("tab");
+end
+
+-- Move the selection down
+actions.down = function()
+    bringToFront();
+    keyboard.stroke("down");
+end
+
+-- Go back or cancel
+actions.back1 = function()
+    bringToFront();
+    keyboard.stroke("escape");
+end
+
+-- Toggle between fullscreen video and navigation when media is playing
+actions.play_menu = function()
+    bringToFront();
+    keyboard.stroke("m");
+end
+
+-- Brings up the popup menu when you fofr instance is browsing the episodes in a TV series
+actions.popup_menu = function()
+    bringToFront();
+    keyboard.stroke("c");
+end
+
+-- Reloads the sections specified in the properties file
+actions.reload_plex_library = function()
+  local testArray = explode(server.get( "plexSections" ), ",");
+  for i, section in ipairs(testArray) do
+    local http = libs.net.http();
+    local sectionRequestResult = http:request({
+      method = "get", 
+      url = server.get ( "plexBaseUrl" ) .. "/library/sections/".. section .."/refresh",
+    });
+    log.info (("Refreshing section ".. section)); 
+  end
+end
+
+-- This function will restart the server if it exxists on the controlled PC
+actions.restart_plex_server = function()
+-- Not implemented yet
+  device.toast ("Not yet implemented!");
+
+  
+end
+
+actions.windows_volume_down = function()
+    bringToFront();
+    keyboard.stroke("volumedown");
+end
+
+actions.windows_volume_mute = function()
+    bringToFront();
+    keyboard.stroke("volumemute");
+end
+
+actions.windows_volume_up = function()
+    bringToFront();
+    keyboard.stroke("volumeup");
+end
+

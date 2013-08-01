@@ -11,7 +11,6 @@ local server = libs.server;
 local device = libs.device;
 local log = libs.log;
 local server = libs.server;
-local timer = libs.timer;
 
 -- *Common functions*
 
@@ -47,14 +46,13 @@ end
 
 -- This runs the first time the remote is loaded
 events.focus = function ()
-  timer.timeout(function ()
+  
     if(server.get ( "screenSwitchActive" ) == "yes") then
         -- Test code
---      log.info("Screen switcher active!");
---      server.update("restart_plex_server", "text", "Test text");
+     log.info("Screen switcher active!");
+     server.update("restart_plex_server", "text", "Test text");
 --      server.update("restart_plex_server", "visibility", "gone");
     end
-  end, 500);
 end
 
 

@@ -48,7 +48,7 @@ end
 events.focus = function ()
   
     if(server.get ( "screenSwitchActive" ) == "yes") then
-        -- Test code
+     -- Test code
      log.info("Screen switcher active!");
      server.update("restart_plex_server", "text", "Test text");
 --      server.update("restart_plex_server", "visibility", "gone");

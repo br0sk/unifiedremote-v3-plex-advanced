@@ -17,8 +17,7 @@ local server = libs.server;
 -- Make the Plex application take focus before the command is executed.
 -- Makes it possible to click any of the controls even if the Plex Window is not active.
 function bringToFront()
-  local hwnd = task.window("Plex.exe");
-  task.switchtowait(hwnd);
+  task.switchtowait("Plex.exe");
 end
 
 -- This function splits a string separated by a character and returns an array
